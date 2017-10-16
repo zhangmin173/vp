@@ -1,6 +1,50 @@
 <template>
   <div>
-    <el-button>默认按钮</el-button>
+    <el-table
+      :data="tableData"
+      border
+      style="width: 100%">
+      <el-table-column
+        fixed
+        prop="date"
+        label="日期"
+        width="150">
+      </el-table-column>
+      <el-table-column
+        prop="name"
+        label="姓名"
+        width="120">
+      </el-table-column>
+      <el-table-column
+        prop="province"
+        label="省份"
+        width="120">
+      </el-table-column>
+      <el-table-column
+        prop="city"
+        label="市区"
+        width="120">
+      </el-table-column>
+      <el-table-column
+        prop="address"
+        label="地址"
+        width="300">
+      </el-table-column>
+      <el-table-column
+        prop="zip"
+        label="邮编"
+        width="120">
+      </el-table-column>
+      <el-table-column
+        fixed="right"
+        label="操作"
+        width="100">
+        <template scope="scope">
+          <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+          <el-button type="text" size="small">编辑</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
@@ -10,45 +54,44 @@ export default {
   components: {
 
   },
+  
+
   data() {
     return {
-      title: '系统提示',
-      msg: '确定要删除吗?',
-      btns: ['确定', '算了'],
-      isShowPop: false,
-      isShowKeyboard: false,
-      nums: [1, 2],
-      isShowSelect: false
+      tableData: [{
+        date: '2016-05-03',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1518 弄',
+        zip: 200333
+      }, {
+        date: '2016-05-02',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1518 弄',
+        zip: 200333
+      }, {
+        date: '2016-05-04',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1518 弄',
+        zip: 200333
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1518 弄',
+        zip: 200333
+      }]
     }
   },
   methods: {
-    ok: function() {
-      this.isShowPop = false
-      console.log('ok')
-    },
-    no: function() {
-      this.isShowPop = false
-      console.log('no')
-    },
-    sok: function() {
-      this.isShowSelect = false
-      console.log('ok')
-    },
-    sno: function() {
-      this.isShowSelect = false
-      console.log('no')
-    },
-    pop: function() {
-      this.isShowPop = true
-    },
-    keyboard: function() {
-      this.isShowKeyboard = true
-    },
-    keychange: function(d) {
-      this.nums = d
-    },
-    showSelect: function() {
-      this.isShowSelect = true
+    handleClick(row) {
+      console.log(row);
     }
   }
 }

@@ -5,9 +5,11 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import Layout from '@/pages/layout'
 import router from '@/router'
+import axios from 'axios'
 
 Vue.use(ElementUI)
 Vue.config.productionTip = true
+Vue.prototype.$ajax = axios
 
 /* eslint-disable no-new */
 new Vue({
