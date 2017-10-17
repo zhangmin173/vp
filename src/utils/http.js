@@ -2,23 +2,44 @@
 
 import axios from 'axios'
 import qs from 'qs'
+import { Loading, Message } from 'element-ui'
 
+// 超时时间
+axios.defaults.timeout = 5000
 // http request 拦截器
-axios.interceptors.request.use(config => {
+let loadinginstace
+axios.interceptors.request.use(
   config => {
-    baseURL: 'https://some-domain.com/api/'
-  }
-  return config
-}, error => {
-  return Promise.reject(error)
-})
+    loadinginstace = Loading.service({ fullscreen: true, text: '拼命加载中' })
+    return config
+  }, error => {
+      loadinginstace.close()
+      Message.error({
+        message: '加载超时'
+      })
+    return Promise.reject(error)
+  })
 
 // http response 拦截器
-axios.interceptors.response.use(response => {
-  return response
-}, error => {
-  return Promise.resolve(error.response)
-})
+axios.interceptors.response.use(
+  response => {
+    loadinginstace.close()
+    return response
+  }, error => {
+    if (error.response) {
+      switch (error.response.status) {
+        case 401:
+          console.log('401')
+        default:
+          console.log(error.response.status)
+      }
+    }
+    loadinginstace.close()
+    Message.error({
+      message: '加载失败'
+    })
+    return Promise.reject(error)
+  })
 
 function checkStatus (response) {
   // loading
@@ -45,12 +66,22 @@ function checkCode (res) {
   return res
 }
 
+
 export default {
   post (url, data, call) {
     axios.post(url, data)
     .then(
       (res) => {
-        call(res)
+        console.log('------ ' + url + ' ------')
+        console.log(res.data)
+        console.log('------ ' + url + ' ------')
+        if (res.data.code == 0) {
+          call(res.data)
+        } else {
+          Message.error({
+            message: res.data.msg
+          })
+        }
       }
     ).catch(
       (res) => {
@@ -59,33 +90,25 @@ export default {
     );
   },
   get (url, params,call) {
-    axios.get(url)
-    .then(
+    axios.get(url,{
+    　　params
+    }).then(
       (res) => {
-        call(res)
+        console.log('------ ' + url + ' ------')
+        console.log(res.data)
+        console.log('------ ' + url + ' ------')
+        if (res.data.code == 0) {
+          call(res.data)
+        } else {
+          Message.error({
+            message: res.data.msg
+          })
+        }
       }
     ).catch(
       (res) => {
         console.log(res)
       }
     );
-    // axios({
-    //   method: 'get',
-    //   baseURL: '',
-    //   url: url,
-    //   data: qs.stringify(params), // get 请求时带的参数
-    //   timeout: 10000,
-    //   headers: {
-    //     'X-Requested-With': 'XMLHttpRequest'
-    //   }
-    // }).then(
-    //   (res) => {
-    //     call(res)
-    //   }
-    // ).catch(
-    //   (res) => {
-    //     console.log(res)
-    //   }
-    // )
   }
 }

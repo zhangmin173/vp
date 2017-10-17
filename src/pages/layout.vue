@@ -42,8 +42,11 @@ export default {
     margin: 0;
   }
   .app-header {
-    position: relative;
+    position: fixed;
     z-index: 1000;
+    left: 0;
+    top: 0;
+    right: 0;
     height: 60px;
   }
   .app-menu {
@@ -67,5 +70,12 @@ export default {
     right: 0;
     bottom: 0;
     height: 44px;
+  }
+  .m-breadcrumb {
+    margin-bottom: 15px;
+  }
+  .m-pagination {
+    text-align: center;
+    margin-top: 15px;
   }
 </style>
