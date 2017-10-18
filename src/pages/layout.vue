@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import vHeader from '../components/header.vue'
-import vMenu from '../components/menu.vue'
-import vFooter from '../components/footer.vue'
+import vHeader from '@/components/header.vue'
+import vMenu from '@/components/menu.vue'
+import vFooter from '@/components/footer.vue'
 export default {
   name: 'layout',
   components: {
@@ -71,9 +71,16 @@ export default {
     bottom: 0;
     height: 44px;
   }
+  // 工具栏
+  .m-toolers {
+    text-align: right;
+    margin-bottom: 15px;
+  }
+  // 面包屑
   .m-breadcrumb {
     margin-bottom: 15px;
   }
+  // 分页
   .m-pagination {
     text-align: center;
     margin-top: 15px;

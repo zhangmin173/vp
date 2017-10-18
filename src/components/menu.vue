@@ -30,8 +30,8 @@ export default {
     },
     getData() {
       if (this.isGet) return
-      this.$http.get('/apis/menu/index', {
-
+      this.$http.get('/apis/menu/show', {
+        
       },(res) => {
         sessionStorage.setItem("menus", JSON.stringify(res.data));
         this.menus = res.data

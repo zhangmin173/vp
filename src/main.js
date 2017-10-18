@@ -14,6 +14,11 @@ Vue.config.productionTip = true
 Vue.prototype.$http = http
 Vue.prototype.$api = api
 
+// 过滤器
+Vue.filter('number', function (value) {
+	return parseInt(value)
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

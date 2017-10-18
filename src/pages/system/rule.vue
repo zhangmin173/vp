@@ -6,7 +6,7 @@
         <el-breadcrumb-item>权限设置</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <el-form :inline="true" :model="searchData" class="demo-form-inline">
+    <el-form :inline="true" :model="searchData">
       <el-form-item label="规则名称">
         <el-input v-model="searchData.title" placeholder="请输入内容"></el-input>
       </el-form-item>
