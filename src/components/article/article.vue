@@ -11,12 +11,12 @@
               <img :src="item.img">
             </div>
             <div class="m-article-title">
-              <router-link :to="{ name: 'ArticleDetailPage', query: { id: item.id }}">{{item.title}}</router-link>
+              <router-link :to="{ name: 'ArticleDetailPage', params: { id: item.id }}" target="_blank">{{item.title}}</router-link>
             </div>
           </div>
           <div class="m-article-child" v-else>
             <div class="m-article-title">
-              <router-link :to="{ name: 'ArticleDetailPage', params: { id: item.id }}">{{item.title}}</router-link>
+              <router-link :to="{ name: 'ArticleDetailPage', params: { id: item.id }}" target="_blank">{{item.title}}</router-link>
             </div>
             <div class="m-article-img" >
               <img :src="item.img">
@@ -26,7 +26,9 @@
       </div>
     </div>
     <div class="m-article-ft">
-      <div class="m-article-btn" @click="edit">编辑</div>
+      <div class="m-article-btn">
+        <router-link :to="{ name: 'ArticleEditPage', params: { id: value.id }}" target="_blank">编辑</router-link>
+      </div>
       <div class="m-article-btn" @click="del">删除</div>
     </div>
   </div>
@@ -46,9 +48,6 @@ export default {
     }
   },
   methods: {
-    edit: function() {
-      this.$emit('edit',this.value)
-    },
     del: function() {
       this.$emit('del',this.value, () => {
         this.visibility = false
@@ -60,10 +59,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
-  @import url('../assets/less/helper/_variable.less');
+  @import url('../../assets/less/helper/_variable.less');
   
   .container {
     box-sizing: border-box;
+    margin-bottom: 30px;
+    background-color: #fff;
   }
   .m-article {
     box-sizing: border-box;
@@ -85,6 +86,7 @@ export default {
 
     .m-article-main {
       position: relative;
+      padding-bottom: 15px;
 
       .m-article-img {
         height: 135px;
@@ -108,6 +110,11 @@ export default {
         font-size: 14px;
         overflow: hidden;
         cursor: pointer;
+
+        a {
+          text-decoration: none;
+          color: #fff;
+        }
       }
     }
 
@@ -135,6 +142,11 @@ export default {
         font-size: 14px;
         overflow: hidden;
         cursor: pointer;
+
+        a {
+          text-decoration: none;
+          color: #222;
+        }
       }
     }
   }
@@ -151,6 +163,11 @@ export default {
       text-align: center;
       line-height: 44px;
       cursor: pointer;
+
+      a {
+        text-decoration: none;
+        color: #222;
+      }
 
       &:nth-child(1) {
         border-right: 1px solid #e7e7eb;

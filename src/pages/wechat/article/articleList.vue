@@ -1,14 +1,6 @@
 <template>
-  <div class="container">
-    <div class="m-breadcrumb">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item>微信管理</el-breadcrumb-item>
-        <el-breadcrumb-item>素材设置</el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>
-    <el-tabs v-model="tabActiveName" @tab-click="tabClick">
-      <el-tab-pane label="文章" name="article">
-        <el-form :inline="true">
+	<div>
+		<el-form :inline="true">
           <el-form-item label="">
             <el-input
               placeholder="标题"
@@ -23,7 +15,7 @@
         </el-form>
         <div class="m-article">
           <div class="m-article-item" v-for="item of tableData">
-            <v-article :value="item" @edit="onEdit" @del="onDel"></v-article>
+            <v-article :value="item" @del="onDel"></v-article>
           </div>
         </div>
         <div class="m-pagination">
@@ -37,31 +29,18 @@
             :total="pageTotal">
           </el-pagination>
         </div>
-      </el-tab-pane>
-      <el-tab-pane label="图片" name="picture">
-        
-      </el-tab-pane>
-      <el-tab-pane label="语音" name="voice">
-        
-      </el-tab-pane>
-      <el-tab-pane label="视频" name="movie">
-        
-      </el-tab-pane>
-    </el-tabs>
-  </div>
+	</div>
 </template>
-
 <script>
-import vArticle from '@/components/article.vue'
+import vArticle from '@/components/article/article.vue'
 export default {
-  name: 'article',
+  name: 'articleList',
   components: {
     vArticle
   },
   data() {
     return {
       tableData: [], // 表单数据
-      tabActiveName: 'article',
       dialogFormVisible: false,
       pageTotal: 0,
       pageIndex: 1,
@@ -147,9 +126,6 @@ export default {
       //   this.pageTotal = res.total
       // })
     },
-    tabClick(node) {
-      this.$router.push({path: '/wechat/' + node.name})
-    },
     onPageSizeChange(val) {
       this.pageSize = val
       this.getData()
@@ -165,15 +141,6 @@ export default {
       this.searchData = {}
       this.getData()
     },
-    onEdit(data) {
-      let id = data.id
-      this.$router.push({
-        name: 'ArticleEditPage',
-        params: {
-          id
-        }
-      })
-    },
     onDel(data,call) {
       call()
     },
@@ -186,9 +153,6 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-  .container {
-    padding-bottom: 60px;
-  }
   .m-article {
     column-count: 5;
 

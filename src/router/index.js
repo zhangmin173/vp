@@ -1,15 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import HomePage from '@/pages/home'
+import HomeLayout from '@/pages/homeLayout'
+import IndexLayout from '@/pages/indexLayout'
 
 import RulePage from '@/pages/system/rule'
 import MenuPage from '@/pages/system/menu'
 
-import ArticlePage from '@/pages/wechat/article/article'
+import MediaLayout from '@/pages/wechat/media'
+
+import ArticleListPage from '@/pages/wechat/article/articleList'
 import ArticleDetailPage from '@/pages/wechat/article/articleDetail'
 import ArticleEditPage from '@/pages/wechat/article/articleEdit'
-import PicturePage from '@/pages/wechat/picture'
+import PictureListPage from '@/pages/wechat/picture/pictureList'
+
 
 Vue.use(Router)
 
@@ -18,55 +22,56 @@ export default new Router({
 	routes: [
 		{
 		  path: '/',
-		  name: 'HomePage',
-		  component: HomePage
-		},
-		{
-		  path: '/system',
-		  component: MenuPage,
+		  name: 'HomeLayout',
+		  component: HomeLayout,
 		  children: [
 		  	{
-			  path: '/system/menu',
+			  path: 'system',
+			  component: MenuPage
+			},
+			{
+			  path: 'system/menu',
 			  name: 'MenuPage',
 			  component: MenuPage
 			},
 			{
-			  path: '/system/rule',
+			  path: 'system/rule',
 			  name: 'RulePage',
 			  component: RulePage
+			},
+			{
+			  path: 'wechat',
+			  component: MediaLayout,
+			  children: [
+			  	{
+				  path: '/wechat/article',
+				  name: 'article',
+				  component: ArticleListPage
+				},
+				{
+				  path: '/wechat/picture',
+				  name: 'picture',
+				  component: PictureListPage
+				}
+			  ]
 			}
 		  ]
 		},
 		{
-		  path: '/wechat',
-		  component: ArticlePage,
+		  path: '/index',
+		  name: 'IndexLayout',
+		  component: IndexLayout,
 		  children: [
 		  	{
-			  path: '/wechat/media',
-			  component: ArticlePage
+			  path: '/article/detail/:id',
+			  name: 'ArticleDetailPage',
+			  component: ArticleDetailPage
 			},
 			{
-			  path: '/wechat/article',
-			  name: 'ArticlePage',
-			  component: ArticlePage,
-			  children: [
-			  	{
-				  path: '/wechat/article/detail',
-				  name: 'ArticleDetailPage',
-				  component: ArticleDetailPage
-				},
-				{
-				  path: '/wechat/article/edit',
-				  name: 'ArticleEditPage',
-				  component: ArticleEditPage
-				}
-			  ]
+			  path: '/article/Edit/:id',
+			  name: 'ArticleEditPage',
+			  component: ArticleEditPage
 			},
-			{
-			  path: '/wechat/picture',
-			  name: 'PicturePage',
-			  component: PicturePage
-			}
 		  ]
 		}
 	]

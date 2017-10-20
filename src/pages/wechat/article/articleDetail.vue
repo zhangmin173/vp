@@ -1,11 +1,6 @@
 <template>
-  <div class="container">
-    <div class="m-breadcrumb">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item>微信管理</el-breadcrumb-item>
-        <el-breadcrumb-item>素材设置</el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>
+  <div>
+    详细页
   </div>
 </template>
 
@@ -45,7 +40,7 @@ export default {
     },
     getData() {
       console.log('页面浏览')
-      console.log(this.$router)
+      console.log(this.$route)
       // this.$http.get('/apis/rule/index', {
       //   page: this.pageIndex,
       //   limit: this.pageSize,
